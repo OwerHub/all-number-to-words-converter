@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  color: whitesmoke;
+  background-color: #272727;
+}
+
+header {
+  min-height: 15vh;
+  background-color: #0f0f0f;
+  color: #747474;
+  padding: 2rem 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+h1,
+h2 {
+  color: #ff652f;
+}
+
+h3,
+h2 span {
+  text-transform: lowercase;
+  color: #a35d44;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1rem;
+  align-items: center;
+}
+
+.numberInputDiv {
+  border: 1px solid #ffe400;
+  border-radius: 10px;
+  padding: 1.5rem;
+  font-size: 130%;
+  display: flex;
+  flex-direction: column;
+}
+.numberInputDiv input {
+  height: 2rem;
+  font-size: 110%;
+  margin: 10px auto;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.numberInputDiv button {
+  height: 2.5rem;
+  width: 80%;
+  margin: 1rem auto;
+  color: #14a76c;
+  font-size: 110%;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 15px;
+}
+
+section div:nth-child(2) {
+  margin: 1rem auto;
+}
+
+section div:nth-child(2) input {
+  cursor: pointer;
+}
+
+.answer {
+  text-align: center;
+  margin: 0rem 2rem;
+  padding: 1rem;
+  max-width: 800px;
+  font-size: 200%;
+  font-weight: bolder;
+}
+
+.textAnswer {
+  border: 2px solid #14a76c;
+  color: #14a76c;
+  border-radius: 10px;
+  padding: 2rem;
+}
+
+.warningAnswer {
+  color: #c53b3b;
+  border: 2px solid #ff2f2f;
+  border-radius: 10px;
+  padding: 2rem;
+}
