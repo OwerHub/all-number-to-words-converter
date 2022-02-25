@@ -45,14 +45,14 @@ const multiplyWords = [
   //bigint from here
   "quintillion",
 ];
-const multiply = [1, 100];
-const division = [100, 10];
+const multiply = [1, 100]; // the other numbers are processed
+const division = [100, 10]; // the other numbers are processed
 
 const toHundred = (numberToHundred) => {
   return numberToHundred < 20
-    ? ones[numberToHundred]
+    ? ones[numberToHundred] // 1-19
     : numberToHundred % 10 === 0
-    ? tens[Math.floor(numberToHundred / 10)]
+    ? tens[Math.floor(numberToHundred / 10)] //20 ,30,40,50...
     : tens[Math.floor(numberToHundred / 10)] + "-" + ones[numberToHundred % 10];
 };
 
@@ -86,7 +86,7 @@ const numberToText = (number, englishTrans = true) => {
     i === multiplyWords.length
   ) {
     const thousandsToHundreds =
-      englishTrans && number > 1000 && number < 2000 && i === 1;
+      englishTrans && number > 1000 && number < 2000 && i === 1; // English word 1000 -2000
 
     let computedDivision = thousandsToHundreds ? 100 : division[i] || 1000;
 
