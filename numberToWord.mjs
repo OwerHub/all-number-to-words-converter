@@ -56,6 +56,10 @@ const toHundred = (numberToHundred) => {
     : tens[Math.floor(numberToHundred / 10)] + "-" + ones[numberToHundred % 10];
 };
 
+const computedMultiply = (i) => {
+  return multiply[i] || 10 ** ((i - 1) * 3);
+};
+
 const numberToText = (number, englishTrans = true) => {
   const isNegative = number < 0;
   let textArray = [];
@@ -81,17 +85,13 @@ const numberToText = (number, englishTrans = true) => {
   // --- text engine
   let i = 0;
 
-  while (
-    number > (multiply[i] || 10 ** ((i - 1) * 3)) ||
-    i === multiplyWords.length
-  ) {
+  while (number > computedMultiply(i) || i === multiplyWords.length) {
     const thousandsToHundreds =
       englishTrans && number > 1000 && number < 2000 && i === 1; // English word 1000 -2000
 
     let computedDivision = thousandsToHundreds ? 100 : division[i] || 1000;
 
-    const partNumber =
-      Math.floor(number / (multiply[i] || 10 ** ((i - 1) * 3))) % computedDivision;
+    const partNumber = Math.floor(number / computedMultiply(i)) % computedDivision;
 
     if (i === 1) {
       textArray.unshift("and");
