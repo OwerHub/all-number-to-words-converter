@@ -49,11 +49,21 @@ const multiply = [1, 100]; // the other numbers are processed
 const division = [100, 10]; // the other numbers are processed
 
 const toHundred = (numberToHundred) => {
-  return numberToHundred < 20
+  if (numberToHundred < 20) {
+    return ones[numberToHundred]; // 1-19
+  }
+
+  if (numberToHundred % 10 === 0) {
+    return tens[Math.floor(numberToHundred / 10)]; //20 ,30,40,50...
+  }
+
+  return tens[Math.floor(numberToHundred / 10)] + "-" + ones[numberToHundred % 10];
+
+  /*   return numberToHundred < 20
     ? ones[numberToHundred] // 1-19
     : numberToHundred % 10 === 0
     ? tens[Math.floor(numberToHundred / 10)] //20 ,30,40,50...
-    : tens[Math.floor(numberToHundred / 10)] + "-" + ones[numberToHundred % 10];
+    : tens[Math.floor(numberToHundred / 10)] + "-" + ones[numberToHundred % 10]; */
 };
 
 const computedMultiply = (i) => {
@@ -116,7 +126,7 @@ const numberToText = (number, englishTrans = true) => {
 };
 
 // if you want to run the test one time in line server,  comment the 119 line
-export { numberToText };
+//export { numberToText };
 
 if (typeof exports !== "undefined") {
   module.exports = numberToText;
