@@ -58,12 +58,6 @@ const toHundred = (numberToHundred) => {
   }
 
   return tens[Math.floor(numberToHundred / 10)] + "-" + ones[numberToHundred % 10];
-
-  /*   return numberToHundred < 20
-    ? ones[numberToHundred] // 1-19
-    : numberToHundred % 10 === 0
-    ? tens[Math.floor(numberToHundred / 10)] //20 ,30,40,50...
-    : tens[Math.floor(numberToHundred / 10)] + "-" + ones[numberToHundred % 10]; */
 };
 
 const computedMultiply = (i) => {
@@ -71,8 +65,6 @@ const computedMultiply = (i) => {
 };
 
 const numberToText = (number, englishTrans = true) => {
-  console.log("number-------", number);
-
   const isNegative = number < 0;
   let textArray = [];
   number = Math.abs(number);
@@ -90,29 +82,14 @@ const numberToText = (number, englishTrans = true) => {
     }
   }
 
-  /*   if (number === 1) {
-    textArray = ["one", ""];
-  } */
-
   // --- text engine
   let i = 0;
 
   while (number >= computedMultiply(i) || i === multiplyWords.length) {
-    console.log("i is -----", i);
     const thousandsToHundreds =
       englishTrans && number > 1000 && number < 2000 && i === 1; // English word 1000 -2000
-
-    let computedDivision = thousandsToHundreds ? 100 : division[i] || 1000;
-
+    const computedDivision = thousandsToHundreds ? 100 : division[i] || 1000;
     const partNumber = Math.floor(number / computedMultiply(i)) % computedDivision;
-
-    /// Console. log section
-    console.log("computedMultiply[i]: ", computedMultiply(i));
-    console.log("computedMultiply[i+1]: ", computedMultiply(i + 1));
-    console.log("comoutedDivision: ", computedDivision);
-    console.log("partNumber is ", partNumber);
-    console.log("multiplyWords[i]", multiplyWords[i]);
-    ///-------------------------
 
     if (partNumber !== 0) {
       textArray.unshift(multiplyWords[i]);
@@ -121,30 +98,16 @@ const numberToText = (number, englishTrans = true) => {
     if (partNumber < 100) {
       textArray.unshift(toHundred(partNumber));
     }
-
-    if (partNumber === 100) {
-      textArray.unshift(`
-      ${toHundred(Math.floor(partNumber / 100))} hundred`);
-    }
-
     if (partNumber > 100) {
-      textArray.unshift(`
-        ${toHundred(Math.floor(partNumber / 100))} hundred and${toHundred(
-        partNumber % 100
-      )}`);
+      textArray.unshift(` and ${toHundred(partNumber % 100)}`);
     }
-
-    /*    textArray.unshift(
-      partNumber < 100
-        ? toHundred(partNumber)
-        : toHundred(Math.floor(partNumber / 100)) +
-            " hundred and " +
-            toHundred(partNumber % 100)
-    ); */
+    if (partNumber > 99) {
+      textArray.unshift(`
+    ${toHundred(Math.floor(partNumber / 100))} hundred`);
+    }
 
     if ((i === 0) & (partNumber !== 0) & (number !== 1)) {
       textArray.unshift("and");
-      console.log("and");
     }
 
     i++;
@@ -156,7 +119,7 @@ const numberToText = (number, englishTrans = true) => {
   return [textArray.join(" ").trim(), false];
 };
 
-// if you want to run the test one time in line server,  comment the 119 line
+// if you want to run the test one time in line server,  comment the next line
 //export { numberToText };
 
 if (typeof exports !== "undefined") {
