@@ -71,6 +71,8 @@ const computedMultiply = (i) => {
 };
 
 const numberToText = (number, englishTrans = true) => {
+  console.log("number-------", number);
+
   const isNegative = number < 0;
   let textArray = [];
   number = Math.abs(number);
@@ -96,15 +98,32 @@ const numberToText = (number, englishTrans = true) => {
   let i = 0;
 
   while (number > computedMultiply(i) || i === multiplyWords.length) {
+    console.log("i is -----", i);
     const thousandsToHundreds =
       englishTrans && number > 1000 && number < 2000 && i === 1; // English word 1000 -2000
 
     let computedDivision = thousandsToHundreds ? 100 : division[i] || 1000;
 
     const partNumber = Math.floor(number / computedMultiply(i)) % computedDivision;
+    console.log(
+      "number: ",
+      number,
+      "| computedMultiply[i] is: ",
+      computedMultiply(i),
+      "|c computedDivision: ",
+      computedDivision,
+      "|| computedMultiply: ",
+      computedMultiply(i)
+    );
+    console.log("partNumber is ", partNumber);
+    console.log("multiplyWords[i]", multiplyWords[i]);
 
-    if (i === 1) {
-      textArray.unshift("and");
+    if (number === computedDivision[i]) {
+      console.log("próba : One" + multiplyWords[i + 1]);
+    }
+
+    if (partNumber !== 0) {
+      textArray.unshift(multiplyWords[i]);
     }
 
     textArray.unshift(
@@ -112,9 +131,14 @@ const numberToText = (number, englishTrans = true) => {
         ? toHundred(partNumber)
         : toHundred(Math.floor(partNumber / 100)) +
             " hundred and " +
-            toHundred(partNumber % 100),
-      multiplyWords[i]
+            toHundred(partNumber % 100)
+      //multiplyWords[i]
     );
+
+    if ((i === 0) & (partNumber !== 0)) {
+      textArray.unshift("and");
+      console.log("and");
+    }
 
     i++;
     thousandsToHundreds && i++;
@@ -126,7 +150,7 @@ const numberToText = (number, englishTrans = true) => {
 };
 
 // if you want to run the test one time in line server,  comment the 119 line
-//export { numberToText };
+export { numberToText };
 
 if (typeof exports !== "undefined") {
   module.exports = numberToText;
