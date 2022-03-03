@@ -23,13 +23,6 @@ test("one number", () => {
   expect(numberToText(1)).toEqual(["one", false]);
 });
 
-test("high valid number ", () => {
-  expect(numberToText(1123456789454326)).toEqual([
-    "one quadrillion one hundred and twenty-three trillion four hundred and fifty-six billion seven hundred and eighty-nine million four hundred and fifty-four thousand three hundred and twenty-six",
-    false,
-  ]);
-});
-
 test("give a text", () => {
   expect(numberToText("asda")).toEqual(["Gimme' Numbers!", true]);
 });
@@ -50,4 +43,20 @@ test("more than safe number negative", () => {
     "This number is out of workspace",
     true,
   ]);
+});
+
+test("minus 100", () => {
+  expect(numberToText(-100)).toEqual(["negative one hundred", false]);
+});
+
+test("1001", () => {
+  expect(numberToText(1001, false)).toEqual(["one thousand and one", false]);
+});
+
+test("1000000", () => {
+  expect(numberToText(1_000_000)).toEqual(["one million", false]);
+});
+
+test("1000000000000000", () => {
+  expect(numberToText(1000000000000000)).toEqual(["one quadrillion", false]);
 });

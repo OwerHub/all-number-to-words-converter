@@ -90,14 +90,14 @@ const numberToText = (number, englishTrans = true) => {
     }
   }
 
-  if (number === 1) {
+  /*   if (number === 1) {
     textArray = ["one", ""];
-  }
+  } */
 
   // --- text engine
   let i = 0;
 
-  while (number > computedMultiply(i) || i === multiplyWords.length) {
+  while (number >= computedMultiply(i) || i === multiplyWords.length) {
     console.log("i is -----", i);
     const thousandsToHundreds =
       englishTrans && number > 1000 && number < 2000 && i === 1; // English word 1000 -2000
@@ -105,37 +105,44 @@ const numberToText = (number, englishTrans = true) => {
     let computedDivision = thousandsToHundreds ? 100 : division[i] || 1000;
 
     const partNumber = Math.floor(number / computedMultiply(i)) % computedDivision;
-    console.log(
-      "number: ",
-      number,
-      "| computedMultiply[i] is: ",
-      computedMultiply(i),
-      "|c computedDivision: ",
-      computedDivision,
-      "|| computedMultiply: ",
-      computedMultiply(i)
-    );
+
+    /// Console. log section
+    console.log("computedMultiply[i]: ", computedMultiply(i));
+    console.log("computedMultiply[i+1]: ", computedMultiply(i + 1));
+    console.log("comoutedDivision: ", computedDivision);
     console.log("partNumber is ", partNumber);
     console.log("multiplyWords[i]", multiplyWords[i]);
-
-    if (number === computedDivision[i]) {
-      console.log("próba : One" + multiplyWords[i + 1]);
-    }
+    ///-------------------------
 
     if (partNumber !== 0) {
       textArray.unshift(multiplyWords[i]);
     }
 
-    textArray.unshift(
+    if (partNumber < 100) {
+      textArray.unshift(toHundred(partNumber));
+    }
+
+    if (partNumber === 100) {
+      textArray.unshift(`
+      ${toHundred(Math.floor(partNumber / 100))} hundred`);
+    }
+
+    if (partNumber > 100) {
+      textArray.unshift(`
+        ${toHundred(Math.floor(partNumber / 100))} hundred and${toHundred(
+        partNumber % 100
+      )}`);
+    }
+
+    /*    textArray.unshift(
       partNumber < 100
         ? toHundred(partNumber)
         : toHundred(Math.floor(partNumber / 100)) +
             " hundred and " +
             toHundred(partNumber % 100)
-      //multiplyWords[i]
-    );
+    ); */
 
-    if ((i === 0) & (partNumber !== 0)) {
+    if ((i === 0) & (partNumber !== 0) & (number !== 1)) {
       textArray.unshift("and");
       console.log("and");
     }
