@@ -157,7 +157,7 @@ const numberToText = (number, englishTrans = true) => {
 };
 
 // if you want to run the test one time in line server,  comment the 119 line
-export { numberToText };
+//export { numberToText };
 
 if (typeof exports !== "undefined") {
   module.exports = numberToText;

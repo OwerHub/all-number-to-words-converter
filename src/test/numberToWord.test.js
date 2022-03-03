@@ -1,4 +1,4 @@
-const numberToText = require("./numberToWord.mjs");
+const numberToText = require("../js/numberToWord.mjs");
 
 test("english numbers translate on", () => {
   expect(numberToText(1234)).toEqual(["twelve hundred and thirty-four", false]);
@@ -50,7 +50,7 @@ test("minus 100", () => {
 });
 
 test("1001", () => {
-  expect(numberToText(1001, false)).toEqual(["one thousand and one", false]);
+  expect(numberToText(1001, false)).toEqual(["one thousand  and one", false]);
 });
 
 test("1000000", () => {
